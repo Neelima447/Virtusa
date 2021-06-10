@@ -1,0 +1,130 @@
+package DemoFactory;
+
+ interface Animal {
+ void speak();
+ }
+package DemoFactory;
+
+ abstract class AnimalFactory {
+ public abstract Animal GetAnimalType(String type)
+ throws
+ Exception;
+ }
+  11 src/CreationalDesignPattern/DemoFactory/Duck.java  
+@@ -0,0 +1,11 @@
+ package DemoFactory;
+
+ public class Duck implements Animal {
+
+ @Override
+ public void speak() {
+ // TODO Auto-generated method stub
+ System.out.println("Duck Says Pack Pack");
+ }
+
+ }
+  19 src/CreationalDesignPattern/DemoFactory/FactoryDemo.java  
+@@ -0,0 +1,19 @@
+ package DemoFactory;
+
+ public class FactoryDemo extends AnimalFactory{
+
+ @Override
+ public Animal GetAnimalType(String type) throws Exception {
+ // TODO Auto-generated method stub
+ switch(type)
+ {
+ case "Duck":
+ return new Duck();
+ case "Tiger":
+ return new Tiger();
+ default:
+ throw new Exception ("Animal type : "+type + " can't be instantiated");
+ }
+ }
+
+ }
+  15 src/CreationalDesignPattern/DemoFactory/FactoryMain.java  
+@@ -0,0 +1,15 @@
+ package DemoFactory;
+
+ public class FactoryMain {
+
+ public static void main(String[] args) throws Exception {
+ // TODO Auto-generated method stub
+ AnimalFactory af=new FactoryDemo();
+ Animal duck=af.GetAnimalType("Duck");
+ duck.speak();
+
+ Animal tiger=af.GetAnimalType("Tiger");
+ tiger.speak();
+ }
+
+ }
+  11 src/CreationalDesignPattern/DemoFactory/Tiger.java  
+@@ -0,0 +1,11 @@
+ package DemoFactory;
+
+ public class Tiger implements Animal {
+
+ @Override
+ public void speak() {
+ // TODO Auto-generated method stub
+ System.out.println("Tiger Says Halum.. Halum");
+ }
+
+ }
+  32 src/CreationalDesignPattern/singletoneClass/BillPughMethod.java  
+@@ -0,0 +1,32 @@
+ package singletoneClass;
+
+ public class BillPughMethod {
+ private static BillPughMethod captain;
+ private BillPughMethod()
+ {
+
+ }
+
+ private static class BillPughSingleton{
+ private static final BillPughMethod captain=new BillPughMethod();
+ }
+
+ public static BillPughMethod getInstance()
+ {
+ return BillPughSingleton.captain;
+ }
+
+ public static BillPughMethod getCaptain() {
+ // TODO Auto-generated method stub
+ if (captain == null)
+ { captain = new BillPughMethod();
+ System.out.println("New captain selected for our team");
+ }
+ else
+ {
+ System.out.print("you already have a Captain for our team");
+ System.out.println(" send him for the toss.");
+ }
+ return captain;
+ }
+ }
+  18 src/CreationalDesignPattern/singletoneClass/Main.java  
+@@ -0,0 +1,18 @@
+ package singletoneClass;
+
+ public class Main {
+
+ public static void main(String[] args) {
+ // TODO Auto-generated method stub
+ System.out.println("***Singletone Pattern Demo***\n");
+ System.out.println("Trying to make a captain for our team");
+ BillPughMethod c1 = BillPughMethod.getCaptain();
+ System.out.println("Trying to make another captain for our team");
+ BillPughMethod c2 = BillPughMethod.getCaptain();
+ if (c1 == c2)
+ {
+ System.out.println("c1 and c2 are same instance");
+ }
+ }
+
+ }
